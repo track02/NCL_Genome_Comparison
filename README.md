@@ -26,17 +26,10 @@ To Do
 
 
 
-
-
 Done
 =================
 - Parse basic match information from BLAST file
 - Loading of Bayesian Network, created externally via WEKA GUI
-- 
--
--
--
--
 
 
 
