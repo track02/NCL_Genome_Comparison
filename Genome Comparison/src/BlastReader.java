@@ -5,7 +5,7 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 
 
-public class FReader {
+public class BlastReader {
 
 	//Fields
 	static File currentComp;

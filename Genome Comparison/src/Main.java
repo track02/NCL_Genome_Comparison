@@ -12,8 +12,8 @@ public class Main {
 				
 	
 		
-		FReader.setComp("Test_Comparison_Files/GRJW41KA015-Alignment.txt");
-		FReader.parseComp();
+		BlastReader.setComp("Test_Comparison_Files/GRJW41KA015-Alignment.txt");
+		BlastReader.parseComp();
 		
 	}
 
