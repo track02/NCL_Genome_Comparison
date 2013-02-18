@@ -44,10 +44,11 @@ public class Main {
 		double[] dist;
 		
 		//Now loop through our instances and pass to the classifier
-		for(int i=0; i <dataSet.numInstances(); i++){
-			
+		for(int i=0; i <dataSet.numInstances(); i++){			
 			
 			dist = bnet.distributionForInstance(dataSet.instance(i));
+			
+			//Display results
 			System.out.println("Matching Bases: " + dataSet.instance(i).value(0) + "/" + dataSet.instance(i).value(1));
 			System.out.println("\nResults:");
 			System.out.println("Total Match: " + dist[0]);

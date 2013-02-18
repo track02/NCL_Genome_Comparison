@@ -2,10 +2,6 @@ import weka.classifiers.Classifier;
 import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.BIFReader;
 
-/*BayesianNet class provides operations for
- * initialising, using and training Bayesian Networks
- */
-
 public class BayesianNet {
 
 	//Static reader
@@ -27,13 +23,10 @@ public class BayesianNet {
 	//Serialises Classifier/BayesNet
 	public static void SerialiseNet(String name, Classifier c) throws Exception{
 		weka.core.SerializationHelper.write("BayesNet/"+name, c);
-	}
-	
+	}	
 	
 	//Deserialises Classifier/BayesNet
-	public static Classifier DeserialiseNet(String name) throws Exception{
-		
-		return (Classifier) weka.core.SerializationHelper.read("BayesNet/"+name);
-		
+	public static Classifier DeserialiseNet(String name) throws Exception{		
+		return (Classifier) weka.core.SerializationHelper.read("BayesNet/"+name);		
 	}
 }

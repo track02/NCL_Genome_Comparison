@@ -3,7 +3,6 @@ public class Match {
 
 	//Fields
 	
-	
 	//Match %
 	private int matchper;
 	
@@ -30,15 +29,10 @@ public class Match {
 		
 		this.matchper = matchper;
 		this.matchbases = matchbases;
-		this.total = total;
-		
-		
-		
-	}
+		this.total = total;		
+	}	
 	
-	
-	//Methods
-	
+	//Methods - Mutators / Accessors	
 	public int getMatchper(){
 		return matchper;
 	}
