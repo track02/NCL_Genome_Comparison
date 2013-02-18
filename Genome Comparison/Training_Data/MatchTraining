@@ -1,0 +1,12 @@
+@relation MatchSet
+
+@attribute 'Matching Bases' numeric
+@attribute 'Non-Matching Bases' numeric
+@attribute Class {'Total Match','Partial Match','No Match'}
+
+@data
+1562,1562,Total Match
+1560,1562,Total Match
+300,1000,Partial Match
+400,700,Partial Match
+0,100, No Match

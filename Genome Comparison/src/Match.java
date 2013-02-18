@@ -10,6 +10,9 @@ public class Match {
 	//No. Matching Bases
 	private int matchbases;
 	
+	//Total No. Bases
+	private int total;
+	
 	//Query Start
 	private int qstart;
 	
@@ -23,10 +26,11 @@ public class Match {
 	private int send;
 	
 	//Constructor
-	public Match(int matchper, int matchbases){
+	public Match(int matchper, int matchbases, int total){
 		
 		this.matchper = matchper;
 		this.matchbases = matchbases;
+		this.total = total;
 		
 		
 		
@@ -41,6 +45,10 @@ public class Match {
 	
 	public int getMatchbases(){
 		return matchbases;
+	}
+	
+	public int getTotal(){
+		return total;
 	}
 	
 	public int getQstart(){
