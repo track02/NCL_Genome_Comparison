@@ -32,13 +32,16 @@ public class Main {
 		Instances dataSet = new Instances("MatchSet", attribs, matches.size());
 		
 		//Set class index - second attribute (Match / Partial / No Match)
-		dataSet.setClassIndex(2);		
+		dataSet.setClassIndex(3);		
 		
 		//Initialise the values of each instance to that of a match object
 		PopulateSet.popMatchSet(dataSet, attribs, matches);
 	
 		//Load Bayesian Network - this is our classifier		
 		Classifier bnet = BayesianNet.DeserialiseNet("MatchNet");
+		
+		//Train Network
+		//TrainNet.train(bnet);
 		
 		//Array to store classifier results
 		double[] dist;
@@ -50,6 +53,7 @@ public class Main {
 			
 			//Display results
 			System.out.println("Matching Bases: " + dataSet.instance(i).value(0) + "/" + dataSet.instance(i).value(1));
+			System.out.println("Match Percentage: " + dataSet.instance(i).value(2) + "%");
 			System.out.println("\nResults:");
 			System.out.println("Total Match: " + dist[0]);
 			System.out.println("Partial Match: " + dist[1]);

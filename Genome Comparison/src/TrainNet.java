@@ -23,23 +23,10 @@ public class TrainNet {
 		Instances trainingset = AL.getDataSet();
 		
 		//Set class index 
-		trainingset.setClassIndex(2);
+		trainingset.setClassIndex(3);
 		
 		//Train the classifier
 		c.buildClassifier(trainingset);
 		
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

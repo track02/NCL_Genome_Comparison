@@ -12,9 +12,10 @@ public class PopulateSet {
 		for(Match m: matches){
 			
 			//Create the instance and set attributes
-			Instance newmatch = new Instance(3);
+			Instance newmatch = new Instance(4);
 			newmatch.setValue((Attribute) attrib.elementAt(0), m.getMatchbases());
 			newmatch.setValue((Attribute) attrib.elementAt(1), m.getTotal());
+			newmatch.setValue((Attribute) attrib.elementAt(2), m.getMatchper());
 			//We don't know what type of match we have - so we leave last attribute empty
 						
 			//Add to the set
