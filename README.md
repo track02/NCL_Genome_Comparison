@@ -9,21 +9,18 @@ Classifying genome comparison features through the use of Bayesian Networks
 
 Current To Do List
 =================
-- Expand FileReader - retrieve subject/query start and end points for each match
-- Output Results to list
-- Further training for basic match features - total match / partial match 
-
+- Expand FileReader - retrieve subject/query points (Find start point and add number of bases)
+- Classify SNP / indels within matches - check gaps in BLAST file
+- Output Results to text file or list
 
 Future To Do List
 =================
 - Expand Bayesian Network - classify further features 
-- Extract further information from different comparison files (MSPCrunch) / genome sequences
-- Consider BioJava library for sequence analysis
+- Consider BioJava library for easier comparison file analysis
 - Further Bayes Net training/testing
 - FileChooser - allow user to select comparison file
 - GUI - display results/queries
 - Database setup
-
 
 
 Done
