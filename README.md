@@ -33,4 +33,13 @@ Done
 - Test/Train Bayesian Network
 
 
+Instructions - running via eclipse/IDE
+=================
+- To train the network remove the comment from the TrainNet.train() function
+- The classifier is saved after running the code, no need to retrain each time
+- The training data can be altered by editing the MatchTraining.arff file
+- Different comparison files may be used - drop them into the Test_Comparison_Files folder and alter the file path for the BlastReader method in Main
+
+
+
 
