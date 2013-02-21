@@ -2,30 +2,10 @@
 
 @attribute 'Matching Bases' numeric
 @attribute 'Non-Matching Bases' numeric
+@attribute 'Match Percentage' numeric
 @attribute Class {'Total Match','Partial Match','No Match'}
 
 @data
-1562,1562,'Total Match'
-1562,1562,'Total Match'
-1562,1562,'Total Match'
-1562,1562,'Total Match'
-1562,1562,'Total Match'
-1562,1562,'Total Match'
-1562,1562,'Total Match'
-1562,1562,'Total Match'
-1562,1562,'Total Match'
-1562,1562,'Total Match'
-1560,1562,'Partial Match'
-1560,1562,'Partial Match'
-1560,1562,'Partial Match'
-1560,1562,'Partial Match'
-1560,1562,'Partial Match'
-1560,1562,'Partial Match'
-1560,1562,'Partial Match'
-1560,1562,'Partial Match'
-1560,1562,'Partial Match'
-1560,1562,'Partial Match'
-1560,1562,'Partial Match'
-300,1000,'Partial Match'
-400,700,'Partial Match'
-0,100,'No Match'
+?,?,100,'Total Match'
+?,?,95,'Partial Match'
+?,?,0,'No Match'
