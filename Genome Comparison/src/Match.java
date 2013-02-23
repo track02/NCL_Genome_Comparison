@@ -12,6 +12,9 @@ public class Match {
 	//Total No. Bases
 	private int total;
 	
+	//No. Gaps in Match
+	private int gaps;
+	
 	//Query Start
 	private int qstart;
 	
@@ -25,11 +28,12 @@ public class Match {
 	private int send;
 	
 	//Constructor
-	public Match(int matchper, int matchbases, int total){
+	public Match(int matchper, int matchbases, int total, int gaps){
 		
 		this.matchper = matchper;
 		this.matchbases = matchbases;
 		this.total = total;		
+		this.gaps = gaps;
 	}	
 	
 	//Methods - Mutators / Accessors	
