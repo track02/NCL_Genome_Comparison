@@ -15,6 +15,9 @@ public class Match {
 	//No. Gaps in Match
 	private int gaps;
 	
+	//Difference between matching/total
+	private int matchdiff;
+	
 	//Query Start
 	private int qstart;
 	
@@ -28,12 +31,13 @@ public class Match {
 	private int send;
 	
 	//Constructor
-	public Match(int matchper, int matchbases, int total, int gaps){
+	public Match(int matchper, int matchbases, int total, int gaps, int matchdiff){
 		
 		this.matchper = matchper;
 		this.matchbases = matchbases;
 		this.total = total;		
 		this.gaps = gaps;
+		this.matchdiff = matchdiff;
 	}	
 	
 	//Methods - Mutators / Accessors	
@@ -63,5 +67,9 @@ public class Match {
 	
 	public int getSend(){
 		return send;
+	}
+
+	public int getMatchdiff() {
+		return matchdiff;
 	}	
 }

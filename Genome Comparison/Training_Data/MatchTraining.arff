@@ -3,9 +3,70 @@
 @attribute 'Matching Bases' numeric
 @attribute 'Non-Matching Bases' numeric
 @attribute 'Match Percentage' numeric
-@attribute Class {'Total Match','Partial Match','No Match'}
+@attribute 'Base Difference' numeric
+@attribute Class {'Total Match','Partial Match','SNP'}
 
 @data
-?,?,100,'Total Match'
-?,?,95,'Partial Match'
-?,?,0,'No Match'
+?,?,100,0,'Total Match'
+?,?,100,0,'Total Match'
+?,?,100,0,'Total Match'
+?,?,100,0,'Total Match'
+?,?,100,0,'Total Match'
+?,?,100,0,'Total Match'
+?,?,100,0,'Total Match'
+?,?,100,0,'Total Match'
+
+?,?,99,?,'Partial Match'
+?,?,99,?,'Partial Match'
+?,?,99,?,'Partial Match'
+?,?,99,?,'Partial Match'
+?,?,99,?,'Partial Match'
+?,?,99,?,'Partial Match'
+
+?,?,98,?,'Partial Match'
+?,?,98,?,'Partial Match'
+?,?,98,?,'Partial Match'
+?,?,98,?,'Partial Match'
+?,?,98,?,'Partial Match'
+?,?,98,?,'Partial Match'
+
+?,?,97,?,'Partial Match'
+?,?,97,?,'Partial Match'
+?,?,97,?,'Partial Match'
+?,?,97,?,'Partial Match'
+?,?,97,?,'Partial Match'
+?,?,97,?,'Partial Match'
+?,?,97,?,'Partial Match'
+
+?,?,96,?,'Partial Match'
+?,?,96,?,'Partial Match'
+?,?,96,?,'Partial Match'
+?,?,96,?,'Partial Match'
+?,?,96,?,'Partial Match'
+?,?,96,?,'Partial Match'
+?,?,96,?,'Partial Match'
+
+?,?,95,?,'Partial Match'
+?,?,95,?,'Partial Match'
+?,?,95,?,'Partial Match'
+?,?,95,?,'Partial Match'
+?,?,95,?,'Partial Match'
+?,?,95,?,'Partial Match'
+?,?,95,?,'Partial Match'
+
+?,?,?,1,'SNP'
+?,?,?,1,'SNP'
+?,?,?,1,'SNP'
+?,?,?,1,'SNP'
+?,?,?,1,'SNP'
+?,?,?,1,'SNP'
+
+?,?,?,2,'Partial Match'
+?,?,?,2,'Partial Match'
+?,?,?,2,'Partial Match'
+?,?,?,2,'Partial Match'
+?,?,?,2,'Partial Match'
+?,?,?,2,'Partial Match'
+
+
+

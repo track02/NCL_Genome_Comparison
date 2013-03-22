@@ -32,7 +32,7 @@ public class Main {
 		Instances dataSet = new Instances("MatchSet", attribs, matches.size());
 		
 		//Set class index - second attribute (Match / Partial / No Match)
-		dataSet.setClassIndex(3);		
+		dataSet.setClassIndex(4);		
 		
 		//Initialise the values of each instance to that of a match object
 		PopulateSet.popMatchSet(dataSet, attribs, matches);
@@ -52,12 +52,14 @@ public class Main {
 			dist = bnet.distributionForInstance(dataSet.instance(i));
 			
 			//Display results
-			System.out.println("Matching Bases: " + dataSet.instance(i).value(0) + "/" + dataSet.instance(i).value(1));
+			System.out.println("\nMatching Bases: " + dataSet.instance(i).value(0) + "/" + dataSet.instance(i).value(1));
 			System.out.println("Match Percentage: " + dataSet.instance(i).value(2) + "%");
+			System.out.println("Base Difference: " + dataSet.instance(i).value(3));
 			System.out.println("\nResults:");
 			System.out.println("Total Match: " + dist[0]);
 			System.out.println("Partial Match: " + dist[1]);
-			System.out.println("No Match: " + dist[2] + "\n");
+			System.out.println("SNP: " + dist[2]);
+			System.out.println("___________________________");
 					
 		}
 		

@@ -70,6 +70,7 @@ public class BlastReader {
 		int totalmatch = 0;
 		int matchper = 0;
 		int gaps = 0;
+		int matchdiff = 0;
 		
 		//Used to count out the three strings from the list
 		int count = 1;
@@ -92,13 +93,14 @@ public class BlastReader {
 				totalmatch = Integer.parseInt(n.substring( n.indexOf("=") + 2, n.indexOf("/")));
 				gaps = Integer.parseInt(n.substring(n.lastIndexOf("=") + 2, n.lastIndexOf("/")));
 				matchper =  (int) ((float) totalmatch/matchnum * 100);
+				matchdiff = matchnum - totalmatch;
 										
 			}			
 			//Last string needed for a match
 			if(count == 3){								
 				
 				//Create the match				
-				newmatches.add(new Match(matchper, totalmatch, matchnum, gaps));								
+				newmatches.add(new Match(matchper, totalmatch, matchnum, gaps, matchdiff));								
 			}			
 			
 			//Reset/Increment Count
