@@ -29,9 +29,11 @@ public class Main {
 		FastVector attribs = VectorCreate.createMatchVector();
 		
 		//Create a set of n instances where n is the number of returned matches
+		
 		Instances dataSet = new Instances("MatchSet", attribs, matches.size());
 		
 		//Set class index - second attribute (Match / Partial / No Match)
+	
 		dataSet.setClassIndex(4);		
 		
 		//Initialise the values of each instance to that of a match object

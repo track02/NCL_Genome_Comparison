@@ -9,7 +9,10 @@ public class BlastReader {
 	//Fields
 	static File currentComp;
 	static Scanner scan;	
-		
+	
+	static boolean getQuery = false; 
+	static boolean getSubject = false;	
+	
 	//Methods
 	
 	//Sets the currentComp to passed file path
@@ -39,14 +42,41 @@ public class BlastReader {
 			current = scan.nextLine();
 			
 			//If the line contains a certain relevant string add it to the list
-			if(current.contains("Score = ") || current.contains("Expect"))
+			if(current.contains("Score = ") || current.contains("Expect")){
 				matches.add(current);			
-			
+				
+				//If we are looking at a line containing "Score"
+				//A new match has been reached - reset booleans to get base locations
+				getQuery = false;
+				getSubject = false;								
+			}				
+				
 			if(current.contains("Gaps") || current.contains("Identities"))			
 				matches.add(current);			
 			
 			if(current.contains("Strand"))				
-				matches.add(current);			
+				matches.add(current);		
+			
+			//Get inital base location of query
+			if(current.contains("Query") && current.contains("Query=") == false && getQuery == false){
+				//matches.add(current);
+				System.out.println(current);
+				//Set boolean to true, only want first reading
+				getQuery = true;				
+			}
+			
+			//Get initial base location of subject
+			if(current.contains("Sbjct") && getSubject == false){
+				//matches.add(current);
+				System.out.println(current);
+				//Set boolean to true, only want first reading
+				getSubject = true;
+				
+				
+				
+				
+			}
+			
 		}
 		
 		//Create matches - we have needed information
@@ -72,6 +102,15 @@ public class BlastReader {
 		int gaps = 0;
 		int matchdiff = 0;
 		
+		//Subject & Query start
+		int qstart = 0;
+		int substart = 0;
+		
+		//Subject & Query end
+		int qend = 0;
+		int subend = 0;
+		
+		
 		//Used to count out the three strings from the list
 		int count = 1;
 		
@@ -80,6 +119,8 @@ public class BlastReader {
 		
 		//For each string
 		for(String n: matchinfo){
+			
+			System.out.println(n);
 			
 			//Extract the needed values and store
 			if(count == 1){		
