@@ -22,7 +22,6 @@ Done
 - Create a set of n instances where n is number of matches found
 - Populate set with match information
 - Test/Train Bayesian Network
-
 - Second network implemented for comparison of two matches
 - Detection of Total & Partial matches
 - Detection of SNP 
