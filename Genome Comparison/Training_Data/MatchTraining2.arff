@@ -1,0 +1,15 @@
+@relation MatchSet
+
+@attribute 'Query Start' numeric
+@attribute 'Query End' numeric
+@attribute 'Subject Start' numeric
+@attribute 'Subject End' numeric
+@attribute 'Next Query Start' numeric
+@attribute 'Next Subject Start' numeric
+@attribute Class {'Insertion','Deletion','N/A'}
+
+@data
+1,1562,?,?,1,0,'Insertion'
+1,1562,?,?,1,0,'Insertion'
+1,1562,?,?,1,0,'Insertion'
+1,1562,?,?,1,0,'Insertion'
