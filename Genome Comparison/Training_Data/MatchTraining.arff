@@ -4,7 +4,11 @@
 @attribute 'Non-Matching Bases' numeric
 @attribute 'Match Percentage' numeric
 @attribute 'Base Difference' numeric
-@attribute Class {'Total Match','Partial Match','SNP'}
+@attribute 'Query Length Difference' numeric
+@attribute 'Subject Length Difference' numeric
+@attribute Class {'Total Match','Partial Match','SNP','SB-IN','SB-DEL'}
+
+
 
 @data
 ?,?,100,0,'Total Match'

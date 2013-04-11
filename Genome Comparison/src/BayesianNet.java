@@ -12,7 +12,7 @@ public class BayesianNet {
 		
 		//Create a new network
 		BayesNet network = new BayesNet();	
-		
+				
 		//Initialise network using BIFXML file
 		network = reader.processFile("BayesNet/" + filename);
 		

@@ -59,27 +59,20 @@ public class BlastReader {
 			
 			//Get inital base location of query
 			if(current.contains("Query") && current.contains("Query=") == false && getQuery == false){
-				//matches.add(current);
-				System.out.println(current);
+				matches.add(current);				
 				//Set boolean to true, only want first reading
 				getQuery = true;				
 			}
 			
 			//Get initial base location of subject
 			if(current.contains("Sbjct") && getSubject == false){
-				//matches.add(current);
-				System.out.println(current);
+				matches.add(current);				
 				//Set boolean to true, only want first reading
 				getSubject = true;
-				
-				
-				
-				
+							
 			}
 			
 		}
-		
-		//Create matches - we have needed information
 			
 		//We now need create a match using the strings extracted from the file
 		parsedmatches = createMatch(matches);			
@@ -92,7 +85,7 @@ public class BlastReader {
 	public static ArrayList<Match> createMatch(ArrayList<String> matchinfo){
 		
 		//Make sure we have needed info
-		if(matchinfo.size() % 3 != 0)		
+		if(matchinfo.size() % 5 != 0)		
 			return null;
 		
 		//If so, initialise variables - for now just number of matching bases / total bases / percentage
@@ -102,13 +95,17 @@ public class BlastReader {
 		int gaps = 0;
 		int matchdiff = 0;
 		
+		//Strand - 1 for plus 0 for minus
+		int qstrand = -1;
+		int substrand = -1;
+		
 		//Subject & Query start
 		int qstart = 0;
 		int substart = 0;
 		
 		//Subject & Query end
 		int qend = 0;
-		int subend = 0;
+		int subend = 0;		
 		
 		
 		//Used to count out the three strings from the list
@@ -120,10 +117,14 @@ public class BlastReader {
 		//For each string
 		for(String n: matchinfo){
 			
-			System.out.println(n);
+			//System.out.println(n);
 			
-			//Extract the needed values and store
+			//First Line Score/Expect info
 			if(count == 1){		
+				
+				
+				
+				
 								
 			}			
 			
@@ -137,15 +138,85 @@ public class BlastReader {
 				matchdiff = matchnum - totalmatch;
 										
 			}			
-			//Last string needed for a match
-			if(count == 3){								
+			
+			//Third Line - strand info
+			if(count == 3){
+				
+				//Read the character 3 spaces behind the /, this is an L if Plus and an N if minus				
+				String qs = n.substring(n.indexOf("/")-3, n.indexOf("/")-2);	
+				
+				//Now check the character
+				if(qs.equals("l"))
+					qstrand = 1;
+				else
+					qstrand = 0;
+								
+				
+				//Read the character 1 space ahead of the /, P if Plus and M if Minus
+				String sst = n.substring(n.indexOf("/")+1, n.indexOf("/")+2);
+				
+				//Now check the character
+				if(sst.equals("P")){
+					substrand = 1;
+				}
+				else{
+					substrand = 0;
+				}
+				
+				System.out.println("QStrand: " + qstrand);
+				System.out.println("SubStrand: " + substrand);
+
+
+				
+			}
+			
+			
+			//Fourth line - Query start value
+			if(count == 4){
+				
+				qstart = Integer.parseInt(n.substring(7, n.indexOf(" ", 7) ));
+				System.out.println("Query Start: " + qstart);
+				
+				//Calculate end value
+				
+				//First examine strand
+				if(qstrand == 1)			
+					//Then add/subtract total number of bases
+					qend = (qstart - 1) + matchnum;
+				else
+					qend = Math.abs((qstart + 1) - matchnum);	
+				
+				System.out.println("Query End: " + qend);
+			}
+			
+			//Final line - Subject start value
+			if(count == 5){				
+				
+				
+				substart = Integer.parseInt(n.substring(7, n.indexOf(" ", 7) ));
+				System.out.println("Subject Start: " + substart);				
+				
+				//Calculate end value				
+				//First examine strand
+				if(substrand == 1)			
+					//Then add/subtract total number of bases
+					subend = (substart - 1) + matchnum;
+				else
+					subend = Math.abs((substart + 1) - matchnum);				
+				
+				System.out.println("Subject End: " + subend);
 				
 				//Create the match				
-				newmatches.add(new Match(matchper, totalmatch, matchnum, gaps, matchdiff));								
+				newmatches.add(new Match(matchper, totalmatch,
+										 matchnum, gaps, 
+										 matchdiff, qstart, 
+										 qend, substart, 
+										 subend));					
+				
 			}			
 			
 			//Reset/Increment Count
-			if(count!=3)
+			if(count!=5)
 				count++;						
 			else
 				count = 1;					
