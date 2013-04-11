@@ -6,31 +6,28 @@ Stage 3 - Project
 Classifying genome comparison features through the use of Bayesian Networks
 
 
-
 Current To Do List
 =================
-- Expand FileReader - retrieve subject/query points (Find start point and add number of bases)
-- Classify SNP / indels within matches - check gaps in BLAST file
-- Output Results to text file or list
-
-Future To Do List
-=================
-- Expand Bayesian Network - classify further features 
-- Consider BioJava library for easier comparison file analysis
-- Further Bayes Net training/testing
+- Build GUI
+- Testing of SB-DEL / SB-In & Insertion / Deletion
+- Output Results to text file or list / Database setup
 - FileChooser - allow user to select comparison file
-- GUI - display results/queries
-- Database setup
-
 
 Done
 =================
 - Parse basic match information from BLAST file
 - Creation of Vector to hold match attributes
 - Loading of Bayesian Network, created externally via WEKA GUI
+- Bayesian Network now built from training data
 - Create a set of n instances where n is number of matches found
 - Populate set with match information
 - Test/Train Bayesian Network
+
+- Second network implemented for comparison of two matches
+- Detection of Total & Partial matches
+- Detection of SNP 
+- Detection of SB-IN / SB-DEL
+- Detection of Insertion / Deletion
 
 
 Instructions - running via eclipse/IDE
