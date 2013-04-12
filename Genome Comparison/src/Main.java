@@ -12,6 +12,7 @@ import weka.classifiers.bayes.BayesNet;
 
 public class Main {
 
+	private static int limit = 1;
 	/**
 	 * @param args
 	 * @throws Exception 
@@ -111,6 +112,26 @@ public class Main {
 			int substart = matches.get(i).getSstart();
 			int subend = matches.get(i).getSend();
 			
+			//Distance from qend to nextqstart
+			int qdistance;
+			//Distance from send to nextsubstart
+			int sdistance;
+			
+			int hold = 0;
+			
+			//Check for reversal
+			if(matches.get(i).getQStrand() == false){				
+				hold = qstart;
+				qstart = qend;
+				qend = hold;				
+			}
+			
+			if(matches.get(i).getSubStrand() == false){
+				hold = substart;
+				substart = subend;
+				subend = hold;					
+			}
+			
 			//Values for match we are comparing to (j)
 			int nextqstart;
 			int nextqend;
@@ -123,8 +144,7 @@ public class Main {
 			//Compare it against every other match
 			for(int j=0; j<dataSet2.numInstances(); j++){
 				
-				//Pull out the query/subject positions
-				
+
 				
 				
 				//Except itself
@@ -133,7 +153,7 @@ public class Main {
 				//Examine Query Start / Subject Start positions of 2nd match
 				//Alter attribute values depending on location
 				//0 = not nearby or overlap
-				//0.5 = overlap
+				//0.5 = within limit
 				//1 = adjacent
 				
 				else{			
@@ -144,32 +164,39 @@ public class Main {
 					nextsubstart = matches.get(j).getSstart();
 					nextsubend = matches.get(j).getSend();
 										
-					//First query positions
-					//Is the next query identical?
+					//Want the distance to the next query/subject match 
+					qdistance = (nextqstart - qend)-1;
+					sdistance = (nextsubstart - subend) -1;		
 					
-					//Is the next query adjacent?
-										
-					//Is the next query overlapping (within the current match querystart-queryend range?)
+					//If adjacent
+					if(qdistance == 0)						
+						dataSet2.instance(i).setValue(4, 1);						
 					
-					//Is the query too far
+					//If within limit
+					else if(qdistance <= limit)				
+						dataSet2.instance(i).setValue(4, 0.5);				
 					
+					//If adjacent
+					if(sdistance == 0)
+						dataSet2.instance(i).setValue(5, 1);						
 					
-
-					//Now subject
-					
-					
-					
-					
-					
+					//If within limit
+					else if(sdistance <= limit)
+						dataSet2.instance(i).setValue(5, 0.5);							
 					
 				}				
 			}			
 		}
 		
-
-		
 		//Serialise the net - save
 		BayesianNet.SerialiseNet("MatchNet", bnet);	
 		BayesianNet.SerialiseNet("IDNet", bnet2);
 	}
+	
+	public static void setlimit(int dist){
+		limit = dist;
+	}
+	
+	
+	
 }

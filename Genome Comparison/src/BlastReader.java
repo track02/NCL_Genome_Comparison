@@ -95,9 +95,9 @@ public class BlastReader {
 		int gaps = 0;
 		int matchdiff = 0;
 		
-		//Strand - 1 for plus 0 for minus
-		int qstrand = -1;
-		int substrand = -1;
+		//Strand - true for plus false for minus
+		boolean qstrand = true;
+		boolean substrand = true;
 		
 		//Subject & Query start
 		int qstart = 0;
@@ -106,6 +106,7 @@ public class BlastReader {
 		//Subject & Query end
 		int qend = 0;
 		int subend = 0;		
+		
 		
 		
 		//Used to count out the three strings from the list
@@ -147,9 +148,9 @@ public class BlastReader {
 				
 				//Now check the character
 				if(qs.equals("l"))
-					qstrand = 1;
+					qstrand = true;
 				else
-					qstrand = 0;
+					qstrand = false;
 								
 				
 				//Read the character 1 space ahead of the /, P if Plus and M if Minus
@@ -157,10 +158,10 @@ public class BlastReader {
 				
 				//Now check the character
 				if(sst.equals("P")){
-					substrand = 1;
+					substrand = true;
 				}
 				else{
-					substrand = 0;
+					substrand = false;
 				}
 				
 				System.out.println("QStrand: " + qstrand);
@@ -180,7 +181,7 @@ public class BlastReader {
 				//Calculate end value
 				
 				//First examine strand
-				if(qstrand == 1)			
+				if(qstrand == true)			
 					//Then add/subtract total number of bases
 					qend = (qstart - 1) + matchnum;
 				else
@@ -198,7 +199,7 @@ public class BlastReader {
 				
 				//Calculate end value				
 				//First examine strand
-				if(substrand == 1)			
+				if(substrand == true)			
 					//Then add/subtract total number of bases
 					subend = (substart - 1) + matchnum;
 				else
@@ -211,7 +212,8 @@ public class BlastReader {
 										 matchnum, gaps, 
 										 matchdiff, qstart, 
 										 qend, substart, 
-										 subend));					
+										 subend,
+										 qstrand, substrand));					
 				
 			}			
 			

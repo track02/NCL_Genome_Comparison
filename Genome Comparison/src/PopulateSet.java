@@ -42,7 +42,7 @@ public class PopulateSet {
 			newmatch.setValue((Attribute) attrib.elementAt(1), m.getQend());
 			newmatch.setValue((Attribute) attrib.elementAt(2), m.getSstart());
 			newmatch.setValue((Attribute) attrib.elementAt(3), m.getSend());
-			//We don't know what type of match we have - so we leave last attribute empty
+			//We don't know what feature we have - so we leave this attribute empty
 			//We also don't know what the next subject/query values are, leave these attributes empty too
 			
 			//Add to the set

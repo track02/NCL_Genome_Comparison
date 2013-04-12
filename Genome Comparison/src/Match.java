@@ -36,13 +36,17 @@ public class Match {
 	//Difference between subject/query
 	private int subdiff;
 	
+	//Boolean to indicate reversal (strand plus/minus)
+	private boolean qstrand;
+	private boolean substrand;
+	
 	//Feature Present in this match
 	private String feature = " ";
 	
 	
 	
 	//Constructor
-	public Match(int matchper, int matchbases, int total, int gaps, int matchdiff, int qstart, int qend, int substart, int subend){
+	public Match(int matchper, int matchbases, int total, int gaps, int matchdiff, int qstart, int qend, int substart, int subend, boolean qstrand, boolean substrand){
 		
 		this.matchper = matchper;
 		this.matchbases = matchbases;
@@ -53,6 +57,8 @@ public class Match {
 		this.qend = qend;
 		this.sstart = substart;
 		this.send = subend;
+		this.qstrand = qstrand;
+		this.substrand = substrand;
 		
 		//Calculate query/subdiff
 		querydiff = ((this.qend - this.qstart) + 1) - ((send - sstart) + 1); 
@@ -112,6 +118,14 @@ public class Match {
 	
 	public String getFeature(){
 		return feature;
+	}
+	
+	public boolean getSubStrand(){
+		return substrand;
+	}
+	
+	public boolean getQStrand(){
+		return qstrand;
 	}
 	
 	
