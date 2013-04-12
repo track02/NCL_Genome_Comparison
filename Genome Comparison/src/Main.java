@@ -20,7 +20,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 				
 		//Sets the comparison file to read from
-		BlastReader.setComp("Test_Comparison_Files/GRJW41KA015-Alignment.txt");
+		BlastReader.setComp("Test_Comparison_Files/Test Data - SB-IN");
 		
 		//Reads from the comparison file and returns a number of matches
 		ArrayList<Match> matches = BlastReader.parseComp();
@@ -58,7 +58,7 @@ public class Main {
 		
 		//Train Network
 		
-		//TrainNet.train(bnet,4, "MatchTraining.arff");		
+		TrainNet.train(bnet, 6, "MatchTraining.arff");		
 		//TrainNet.train(bnet2, 6, "MatchTraining2.arff");
 				
 		//Array to store classifier results
@@ -74,6 +74,8 @@ public class Main {
 		
 		//Now loop through our instances and pass to the classifier
 		for(int i=0; i <dataSet.numInstances(); i++){						
+			
+			System.out.println("QDiff - " + matches.get(i).getQDiff() + "\nSDiff - " + matches.get(i).getSDiff() + "\n\n\n");
 			
 			dist = bnet.distributionForInstance(dataSet.instance(i));
 						
@@ -93,12 +95,7 @@ public class Main {
 		
 		
 		//Comparing matches against matches
-		
-		for(Match m: matches){
-			
-			System.out.println(m.getQstart() + " " + m.getQend() + " " + m.getSstart() + " " + m.getSend());
-			
-		}
+
 		
 		//For each match
 		for(int i=0; i <dataSet.numInstances(); i++){
@@ -138,7 +135,7 @@ public class Main {
 			int nextsubstart;
 			int nextsubend;
 			
-			System.out.println(qstart + " " + qend + " " + substart + " " + subend);
+			
 						
 			
 			//Compare it against every other match
@@ -160,13 +157,28 @@ public class Main {
 					
 					//Initialise variables 
 					nextqstart = matches.get(j).getQstart();
-					nextqend = matches.get(j).getQend();
+					nextqend = matches.get(j).getQend();				
 					nextsubstart = matches.get(j).getSstart();
 					nextsubend = matches.get(j).getSend();
-										
+					
+					//Reverse depending on strand
+					if(matches.get(j).getQStrand() == false){				
+						hold = nextqstart;
+						nextqstart = nextqend;
+						nextqend = hold;				
+					}
+					
+					if(matches.get(j).getSubStrand() == false){
+						hold = nextsubstart;
+						nextsubstart = nextsubend;
+						nextsubend = hold;					
+					}
+					
 					//Want the distance to the next query/subject match 
-					qdistance = (nextqstart - qend)-1;
-					sdistance = (nextsubstart - subend) -1;		
+					qdistance = Math.abs((nextqstart - qend)-1);
+					sdistance = Math.abs((nextsubstart - subend) -1);		
+					System.out.println("\nNext Q Start: " + nextqstart + "\nQ End " + qend + "\nDistance Between: " + qdistance);
+					System.out.println("\nNext S Start: " + nextsubstart + "\nS End " + subend + "\nDistance Between: " + sdistance);
 					
 					//If adjacent
 					if(qdistance == 0)						
@@ -197,6 +209,17 @@ public class Main {
 		limit = dist;
 	}
 	
-	
+	public static int[] reverseval(int a, int b){
+		
+		int[] values = new int[2];
+		int hold = a;
+		a = b;
+		b = hold;
+		values[0] = a;
+		values[1] = b;
+		
+		return values;
+		
+	}
 	
 }

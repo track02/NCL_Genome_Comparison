@@ -176,16 +176,9 @@ public class BlastReader {
 			if(count == 4){
 				
 				qstart = Integer.parseInt(n.substring(7, n.indexOf(" ", 7) ));
-				System.out.println("Query Start: " + qstart);
+				qend = Integer.parseInt(n.substring(n.lastIndexOf(" ")+1, n.length()));
 				
-				//Calculate end value
-				
-				//First examine strand
-				if(qstrand == true)			
-					//Then add/subtract total number of bases
-					qend = (qstart - 1) + matchnum;
-				else
-					qend = Math.abs((qstart + 1) - matchnum);	
+
 				
 				System.out.println("Query End: " + qend);
 			}
@@ -195,16 +188,10 @@ public class BlastReader {
 				
 				
 				substart = Integer.parseInt(n.substring(7, n.indexOf(" ", 7) ));
+				subend = Integer.parseInt(n.substring(n.lastIndexOf(" ")+1, n.length()));
 				System.out.println("Subject Start: " + substart);				
 				
-				//Calculate end value				
-				//First examine strand
-				if(substrand == true)			
-					//Then add/subtract total number of bases
-					subend = (substart - 1) + matchnum;
-				else
-					subend = Math.abs((substart + 1) - matchnum);				
-				
+								
 				System.out.println("Subject End: " + subend);
 				
 				//Create the match				

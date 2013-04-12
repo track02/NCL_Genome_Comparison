@@ -61,8 +61,42 @@ public class Match {
 		this.substrand = substrand;
 		
 		//Calculate query/subdiff
-		querydiff = ((this.qend - this.qstart) + 1) - ((send - sstart) + 1); 
-		subdiff = ((send - sstart) + 1) - ((this.qend - this.qstart) + 1); 
+		//System.out.println(this.qend + "  " + this.qstart);
+		//System.out.println(send + "  " + sstart);
+		
+		System.out.println(this.qend - this.qstart);
+		System.out.println(this.sstart - this.send);
+		
+		//Both plus
+		if(this.qstrand == true && this.substrand == true){
+			
+			querydiff = (this.qend - this.qstart) - ((send - sstart)); 
+			subdiff = ((send - sstart)) - (this.qend - this.qstart);			
+		}
+		
+		else if(this.qstrand == true && this.substrand ==false){
+			
+			querydiff = (this.qend - this.qstart) - ((sstart - send)); 
+			subdiff = ((sstart - send)) - (this.qend - this.qstart); 			
+			
+		}
+		else if(this.qstrand == false && this.substrand == true){
+			
+			querydiff = (this.qstart - this.qend) - ((send - sstart)); 
+			subdiff = ((send - sstart)) - (this.qstart - this.qend); 			
+		}
+		else{
+			
+			querydiff = (this.qstart - this.qend + 1) - ((sstart - send)); 
+			subdiff = ((sstart - send + 1)) - (this.qstart - this.qend);
+			
+			
+		}
+			
+			
+		
+		
+
 		
 		
 	}	

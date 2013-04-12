@@ -1,0 +1,36 @@
+BLASTN 2.2.27+
+Reference: Zheng Zhang, Scott Schwartz, Lukas Wagner, and
+Webb Miller (2000), "A greedy algorithm for aligning DNA
+sequences", J Comput Biol 2000; 7(1-2):203-14.
+
+
+RID: GRJW41KA015
+
+
+Database: Complete microbial genomes
+           2,719 sequences; 8,052,707,809 total letters
+Query= gi|444439706|ref|NR_075021.1| Thermodesulfatator indicus DSM 15286
+strain DSM 15286 16S ribosomal RNA, complete sequence
+
+Length=1562
+
+
+                                                                   Score     E
+Sequences producing significant alignments:                       (Bits)  Value
+
+ref|NC_015681.1|  Thermodesulfatator indicus DSM 15286 chromos...   2885   0.0  
+
+ALIGNMENTS
+>ref|NC_015681.1| Thermodesulfatator indicus DSM 15286 chromosome, complete genome
+Length=2322224
+
+ Features in this part of subject sequence:
+   rRNA-16S ribosomal RNA
+
+ Score =  2885 bits (1562),  Expect = 0.0
+ Identities = 60/60 (100%), Gaps = 0/60 (0%)
+ Strand=Plus/Minus
+
+Query  1       AGGGTTTGATCCTGGCTCAGGGCGAACGCTGGCGGCGCGCCTAACACATGCAAGTCGAGG  60
+               ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Sbjct  534957  AGGGTTTGATCCTGGCTCAGGGCGAACGCTGGCGGCGCGCCTAACACATGCAAGTCGAGG  534898
