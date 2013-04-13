@@ -29,14 +29,19 @@ Length=2322224
 
  Score =  2885 bits (1562),  Expect = 0.0
  Identities = 59/60 (99%), Gaps = 1/60 (0%)
- Strand=Plus/Minus
+ Strand=Plus/Plus
 
 Query  1       AGGGTTTGATCCTGGCTCAGGGCGAACGCTGGCGGCGCGCCTAACAC-TGCAAGTCGAGG  60
                ||||||||||||||||||||||||||||||||||||||||||||||| ||||||||||||
-Sbjct  534957  AGGGTTTGATCCTGGCTCAGGGCGAACGCTGGCGGCGCGCCTAACACATGCAAGTCGAGG  534899
+Sbjct  1  	   AGGGTTTGATCCTGGCTCAGGGCGAACGCTGGCGGCGCGCCTAACACATGCAAGTCGAGG  60
 
+ Score =  2885 bits (1562),  Expect = 0.0
+ Identities = 59/60 (99%), Gaps = 1/60 (0%)
+ Strand=Plus/Plus
 
-
+Query  61      AGGGTTTGATCCTGGCTCAGGGCGAACGCTGGCGGCGCGCCTAACAC-TGCAAGTCGAGG  120
+               ||||||||||||||||||||||||||||||||||||||||||||||| ||||||||||||
+Sbjct  1       AGGGTTTGATCCTGGCTCAGGGCGAACGCTGGCGGCGCGCCTAACACATGCAAGTCGAGG  60
 
 
 

@@ -20,12 +20,10 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 				
 		//Sets the comparison file to read from
-		BlastReader.setComp("Test_Comparison_Files/Test Data - SB-IN");
+		BlastReader.setComp("Test_Comparison_Files/Test Data - Insertion");
 		
 		//Reads from the comparison file and returns a number of matches
 		ArrayList<Match> matches = BlastReader.parseComp();
-		
-
 		
 		//Now we create feature vectors holding the attributes of our problems
 		
@@ -58,7 +56,7 @@ public class Main {
 		
 		//Train Network
 		
-		TrainNet.train(bnet, 6, "MatchTraining.arff");		
+		//TrainNet.train(bnet, 6, "MatchTraining.arff");		
 		//TrainNet.train(bnet2, 6, "MatchTraining2.arff");
 				
 		//Array to store classifier results
@@ -99,9 +97,7 @@ public class Main {
 		
 		//For each match
 		for(int i=0; i <dataSet.numInstances(); i++){
-			
-			
-			dist2 = bnet2.distributionForInstance(dataSet2.instance(i));
+				
 			
 			//Values for this match (i)
 			int qstart = matches.get(i).getQstart();
@@ -142,7 +138,7 @@ public class Main {
 			for(int j=0; j<dataSet2.numInstances(); j++){
 				
 
-				
+				System.out.println(j);
 				
 				//Except itself
 				if(j == i){}
@@ -194,7 +190,14 @@ public class Main {
 					
 					//If within limit
 					else if(sdistance <= limit)
-						dataSet2.instance(i).setValue(5, 0.5);							
+						dataSet2.instance(i).setValue(5, 0.5);		
+					
+					dist = bnet2.distributionForInstance(dataSet2.instance(i));
+					
+					System.out.println("Insertion: " + dist[0]);
+					System.out.println("Deletion: " + dist[1]);
+					System.out.println("N/A: " + dist[2]);
+					
 					
 				}				
 			}			
