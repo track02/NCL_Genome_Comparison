@@ -20,7 +20,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 				
 		//Sets the comparison file to read from
-		BlastReader.setComp("Test_Comparison_Files/Test Data - Deletion");
+		BlastReader.setComp("Test_Comparison_Files/Test Data - Duplication");
 		
 		//Reads from the comparison file and returns a number of matches
 		ArrayList<Match> matches = BlastReader.parseComp();
@@ -57,7 +57,7 @@ public class Main {
 		//Train Network
 		
 		//TrainNet.train(bnet, 6, "MatchTraining.arff");		
-		//TrainNet.train(bnet2, 6, "MatchTraining2.arff");
+		TrainNet.train(bnet2, 6, "MatchTraining2.arff");
 				
 		//Array to store classifier results
 		double[] dist;
@@ -146,8 +146,10 @@ public class Main {
 				//Examine Query Start / Subject Start positions of 2nd match
 				//Alter attribute values depending on location
 				//0 = not nearby or overlap
-				//0.5 = within limit
-				//1 = adjacent
+				//1 = within limit/adjacent
+				
+				//2 = This match has been duplicated
+				//3 = No duplication
 				
 				else{			
 					
@@ -194,8 +196,7 @@ public class Main {
 						qdistance = Math.abs((nextqend - qstart)-1);
 					if(Math.abs((nextsubend - substart)-1) < sdistance)
 						sdistance = Math.abs((nextsubend - substart)-1);
-					
-					
+										
 					
 					System.out.println("\nNext Q Start: " + nextqstart + "\nQ End " + qend + "\nDistance Between: " + qdistance);
 					System.out.println("\nNext S Start: " + nextsubstart + "\nS End " + subend + "\nDistance Between: " + sdistance);
@@ -216,11 +217,31 @@ public class Main {
 					else if(sdistance <= limit)
 						dataSet2.instance(i).setValue(5, 1);		
 					
+					//If a duplication is present overwrite ins/del changes
+					if(qstart == nextqstart && qend == nextqend){
+						
+						dataSet2.instance(i).setValue(4,2);
+						dataSet2.instance(i).setValue(5,3);
+						
+					}
+					
+					else if (substart == nextsubstart && subend == nextsubend){
+						
+						dataSet2.instance(i).setValue(4,3);
+						dataSet2.instance(i).setValue(5,2);					
+						
+					}
+					
+
+					
+					
 					dist = bnet2.distributionForInstance(dataSet2.instance(i));
 					
 					System.out.println("Insertion: " + dist[0]);
 					System.out.println("Deletion: " + dist[1]);
-					System.out.println("N/A: " + dist[2]);
+					System.out.println("Query Duplication: " + dist[2]);
+					System.out.println("Subject Duplication: " + dist[3]);
+					System.out.println("N/A: " + dist[4]);
 					
 					
 				}				

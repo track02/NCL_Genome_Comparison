@@ -54,9 +54,11 @@ public class VectorCreate {
 		
 		
 		//Class attribute		
-		FastVector fvClass = new FastVector(3);
+		FastVector fvClass = new FastVector(5);
 		fvClass.addElement("Insertion");
 		fvClass.addElement("Deletion");
+		fvClass.addElement("Query Duplication");
+		fvClass.addElement("Subject Duplication");
 		fvClass.addElement("Nothing found");
 		Attribute ClassAttribute = new Attribute("Class", fvClass);
 						
