@@ -20,7 +20,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 				
 		//Sets the comparison file to read from
-		BlastReader.setComp("Test_Comparison_Files/Test Data - Insertion");
+		BlastReader.setComp("Test_Comparison_Files/Test Data - Deletion");
 		
 		//Reads from the comparison file and returns a number of matches
 		ArrayList<Match> matches = BlastReader.parseComp();
@@ -170,9 +170,33 @@ public class Main {
 						nextsubend = hold;					
 					}
 					
-					//Want the distance to the next query/subject match 
+					//Want the shortest distance distance to the next query/subject match 
+					
+					//First start to end
 					qdistance = Math.abs((nextqstart - qend)-1);
-					sdistance = Math.abs((nextsubstart - subend) -1);		
+					sdistance = Math.abs((nextsubstart - subend) -1);	
+					
+					
+					//Start to start
+					if(Math.abs((nextqstart - qend)-1) < qdistance)
+						qdistance = Math.abs((nextqstart - qend)-1);
+					if(Math.abs((nextsubstart - subend)-1) < sdistance)
+						sdistance = Math.abs((nextsubstart - subend)-1);
+						
+					//End to end
+					if(Math.abs((nextqend - qend)-1) < qdistance)
+						qdistance = Math.abs((nextqend - qend)-1);
+					if(Math.abs((nextsubend - subend)-1) < sdistance)
+						sdistance = Math.abs((nextsubend - subend)-1);
+										
+					//End to start
+					if(Math.abs((nextqend - qstart)-1) < qdistance)
+						qdistance = Math.abs((nextqend - qstart)-1);
+					if(Math.abs((nextsubend - substart)-1) < sdistance)
+						sdistance = Math.abs((nextsubend - substart)-1);
+					
+					
+					
 					System.out.println("\nNext Q Start: " + nextqstart + "\nQ End " + qend + "\nDistance Between: " + qdistance);
 					System.out.println("\nNext S Start: " + nextsubstart + "\nS End " + subend + "\nDistance Between: " + sdistance);
 					
@@ -182,7 +206,7 @@ public class Main {
 					
 					//If within limit
 					else if(qdistance <= limit)				
-						dataSet2.instance(i).setValue(4, 0.5);				
+						dataSet2.instance(i).setValue(4, 1);				
 					
 					//If adjacent
 					if(sdistance == 0)
@@ -190,7 +214,7 @@ public class Main {
 					
 					//If within limit
 					else if(sdistance <= limit)
-						dataSet2.instance(i).setValue(5, 0.5);		
+						dataSet2.instance(i).setValue(5, 1);		
 					
 					dist = bnet2.distributionForInstance(dataSet2.instance(i));
 					
