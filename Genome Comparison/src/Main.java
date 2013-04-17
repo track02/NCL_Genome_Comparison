@@ -13,12 +13,18 @@ import weka.classifiers.bayes.BayesNet;
 public class Main {
 
 	private static int limit = 1;
-	/**
-	 * @param args
-	 * @throws Exception 
-	 */
+
+	
+	
 	public static void main(String[] args) throws Exception {
-				
+		
+		//Set up GUI
+		Gui window = new Gui();
+		window.drawWindow();
+		
+		
+		
+		
 		//Sets the comparison file to read from
 		BlastReader.setComp("Test_Comparison_Files/Test Data - Duplication");
 		
