@@ -14,19 +14,34 @@ public class Main {
 
 	private static int limit = 1;
 
+	private static Classifier bnet;
+	
+	private static Classifier bnet2;
 	
 	
 	public static void main(String[] args) throws Exception {
 		
+		//Read in saved Bayesnets
+		bnet = BayesianNet.DeserialiseNet("MatchNet");
+		bnet2 = BayesianNet.DeserialiseNet("IDNet");
+		
+		
+		
 		//Set up GUI
 		Gui window = new Gui();
+		
+		//Pass networks
+		window.setNetworks(bnet, bnet2);
+		
 		window.drawWindow();
+	
+	}
+	
 		
 		
-		
-		
+	public static void run(String[] args) throws Exception {
 		//Sets the comparison file to read from
-		BlastReader.setComp("Test_Comparison_Files/Test Data - Duplication");
+		//BlastReader.setComp("Test_Comparison_Files/Test Data - Duplication");
 		
 		//Reads from the comparison file and returns a number of matches
 		ArrayList<Match> matches = BlastReader.parseComp();
@@ -55,15 +70,13 @@ public class Main {
 		
 		PopulateSet.popMatchSet2(dataSet2, attribs2, matches);
 	
-		//Load Bayesian Network - this is our classifier		
-		Classifier bnet = BayesianNet.DeserialiseNet("MatchNet");
-		
-		Classifier bnet2 = BayesianNet.DeserialiseNet("IDNet");
+
+
 		
 		//Train Network
 		
-		//TrainNet.train(bnet, 6, "MatchTraining.arff");		
-		TrainNet.train(bnet2, 6, "MatchTraining2.arff");
+		TrainNet.train(bnet);		
+		//TrainNet.train(bnet2, 6, "MatchTraining2.arff");
 				
 		//Array to store classifier results
 		double[] dist;
@@ -238,16 +251,14 @@ public class Main {
 						
 					}
 					
-
 					
+					dist2 = bnet2.distributionForInstance(dataSet2.instance(i));
 					
-					dist = bnet2.distributionForInstance(dataSet2.instance(i));
-					
-					System.out.println("Insertion: " + dist[0]);
-					System.out.println("Deletion: " + dist[1]);
-					System.out.println("Query Duplication: " + dist[2]);
-					System.out.println("Subject Duplication: " + dist[3]);
-					System.out.println("N/A: " + dist[4]);
+					System.out.println("Insertion: " + dist2[0]);
+					System.out.println("Deletion: " + dist2[1]);
+					System.out.println("Query Duplication: " + dist2[2]);
+					System.out.println("Subject Duplication: " + dist2[3]);
+					System.out.println("N/A: " + dist2[4]);
 					
 					
 				}				
@@ -263,17 +274,9 @@ public class Main {
 		limit = dist;
 	}
 	
-	public static int[] reverseval(int a, int b){
-		
-		int[] values = new int[2];
-		int hold = a;
-		a = b;
-		b = hold;
-		values[0] = a;
-		values[1] = b;
-		
-		return values;
-		
-	}
+
+	
+
+	
 	
 }

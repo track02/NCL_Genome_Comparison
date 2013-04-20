@@ -9,13 +9,16 @@ import weka.core.converters.ArffLoader;
 //Used to train a classifier
 public class TrainNet {
 
-	public static void train(Classifier c, int classIndex, String path) throws IOException, Exception{
+	private static File testdata;
+	
+	
+	public static void train(Classifier c) throws IOException, Exception{
 		
 		//Allows arff files to be converted to instances for use by classifier
 		ArffLoader AL = new ArffLoader();
 		
 		//arff file to use
-		File arffdata = new File("Training_Data/" + path);
+		File arffdata = testdata;
 		
 		//Load file
 		AL.setFile(arffdata);
@@ -24,12 +27,17 @@ public class TrainNet {
 		Instances trainingset = AL.getDataSet();
 		
 		//Set class index 
-		trainingset.setClassIndex(classIndex);
+		trainingset.setClassIndex(6);
 		
 		//Train the classifier
-		c.buildClassifier(trainingset);
+		c.buildClassifier(trainingset);				
 		
-		
+		System.out.println("Training Complete!");
 		
 	}
+	
+	public static void setFile(File f){
+		testdata = f;
+	}
+	
 }

@@ -17,9 +17,9 @@ public class BlastReader {
 	
 	//Sets the currentComp to passed file path
 	//TODO - File Chooser + GUI
-	public static void setComp(String path) throws FileNotFoundException{
+	public static void setComp(File f) throws FileNotFoundException{
 				
-		currentComp = new File(path);		
+		currentComp = f;		
 		scan = new Scanner(currentComp);		
 	}
 	
