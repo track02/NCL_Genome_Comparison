@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
-public class Gui {
+public class Display {
 
 	//Fields
 	private JFileChooser filec = new JFileChooser();
@@ -143,7 +143,7 @@ public class Gui {
 	
 	
 	//Constructor
-	public Gui(){
+	public Display(){
 		
 				
 		//Set up	

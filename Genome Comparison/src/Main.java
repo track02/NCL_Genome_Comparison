@@ -24,7 +24,7 @@ public class Main {
 		//Read in saved Bayesnets
 		
 		//Set up GUI
-		Gui window = new Gui();
+		Display window = new Display();
 		
 		//Pass networks
 		window.setNetworks(BayesianNet.DeserialiseNet("MatchNet"),BayesianNet.DeserialiseNet("IDNet") );
