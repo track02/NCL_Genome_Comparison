@@ -75,7 +75,7 @@ public class Gui {
 				
 				//Call the run method
 				try {
-					Main.run(null);
+					Main.run(net1, net2);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

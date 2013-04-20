@@ -14,24 +14,20 @@ public class Main {
 
 	private static int limit = 1;
 
-	private static Classifier bnet;
+	//private static Classifier bnet;
 	
-	private static Classifier bnet2;
+	//private static Classifier bnet2;
 	
 	
 	public static void main(String[] args) throws Exception {
 		
 		//Read in saved Bayesnets
-		bnet = BayesianNet.DeserialiseNet("MatchNet");
-		bnet2 = BayesianNet.DeserialiseNet("IDNet");
-		
-		
 		
 		//Set up GUI
 		Gui window = new Gui();
 		
 		//Pass networks
-		window.setNetworks(bnet, bnet2);
+		window.setNetworks(BayesianNet.DeserialiseNet("MatchNet"),BayesianNet.DeserialiseNet("IDNet") );
 		
 		window.drawWindow();
 	
@@ -39,7 +35,7 @@ public class Main {
 	
 		
 		
-	public static void run(String[] args) throws Exception {
+	public static void run(Classifier net1, Classifier net2) throws Exception {
 		//Sets the comparison file to read from
 		//BlastReader.setComp("Test_Comparison_Files/Test Data - Duplication");
 		
@@ -70,13 +66,6 @@ public class Main {
 		
 		PopulateSet.popMatchSet2(dataSet2, attribs2, matches);
 	
-
-
-		
-		//Train Network
-		
-		TrainNet.train(bnet);		
-		//TrainNet.train(bnet2, 6, "MatchTraining2.arff");
 				
 		//Array to store classifier results
 		double[] dist;
@@ -94,7 +83,7 @@ public class Main {
 			
 			System.out.println("QDiff - " + matches.get(i).getQDiff() + "\nSDiff - " + matches.get(i).getSDiff() + "\n\n\n");
 			
-			dist = bnet.distributionForInstance(dataSet.instance(i));
+			dist = net1.distributionForInstance(dataSet.instance(i));
 						
 			//Display results
 			System.out.println("\nMatching Bases: " + dataSet.instance(i).value(0) + "/" + dataSet.instance(i).value(1));
@@ -252,7 +241,7 @@ public class Main {
 					}
 					
 					
-					dist2 = bnet2.distributionForInstance(dataSet2.instance(i));
+					dist2 = net2.distributionForInstance(dataSet2.instance(i));
 					
 					System.out.println("Insertion: " + dist2[0]);
 					System.out.println("Deletion: " + dist2[1]);
@@ -266,8 +255,8 @@ public class Main {
 		}
 		
 		//Serialise the net - save
-		BayesianNet.SerialiseNet("MatchNet", bnet);	
-		BayesianNet.SerialiseNet("IDNet", bnet2);
+		BayesianNet.SerialiseNet("MatchNet", net1);	
+		BayesianNet.SerialiseNet("IDNet", net2);
 	}
 	
 	public static void setlimit(int dist){
