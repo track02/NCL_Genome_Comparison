@@ -144,7 +144,7 @@ Sbjct  533397  CT  533396
    rRNA-16S ribosomal RNA
 
  Score =  2874 bits (1556),  Expect = 0.0
- Identities = 1560/1562 (99%), Gaps = 0/1562 (0%)
+ Identities = 1560/1562 (99%), Gaps = 1/1562 (0%)
  Strand=Plus/Minus
 
 Query  1       AGGGTTTGATCCTGGCTCAGGGCGAACGCTGGCGGCGCGCCTAACACATGCAAGTCGAGG  60
@@ -253,7 +253,7 @@ Sbjct  864452  GCTGGTGACTGGGGTGAAGTCGTAACAAGGTATCCCTACCGGAAGGTGGGGATGGATCAC  864
 
 Query  1561    CT  1562
                ||
-Sbjct  864392  CT  864391
+Sbjct  864392  C-  864391
 
 
   Database: Complete microbial genomes

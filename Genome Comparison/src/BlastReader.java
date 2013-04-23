@@ -13,6 +13,12 @@ public class BlastReader {
 	static boolean getQuery = false; 
 	static boolean getSubject = false;	
 	
+	static int newmatch = -1;
+	static ArrayList<Integer> matchSGaps = new ArrayList<Integer>(); 
+	static ArrayList<Integer> matchQGaps = new ArrayList<Integer>();
+	static int qgaps = 0;
+	static int sgaps = 0;
+	
 	//Methods
 	
 	//Sets the currentComp to passed file path
@@ -48,7 +54,15 @@ public class BlastReader {
 				//If we are looking at a line containing "Score"
 				//A new match has been reached - reset booleans to get base locations
 				getQuery = false;
-				getSubject = false;								
+				getSubject = false;
+				//Set index to store gaps in
+				newmatch++;
+				//Initialise this position
+				matchQGaps.add(0);
+				matchSGaps.add(0);
+				//Reset gaps for this match
+				qgaps = 0;
+				sgaps = 0;
 			}				
 				
 			if(current.contains("Gaps") || current.contains("Identities"))			
@@ -65,12 +79,48 @@ public class BlastReader {
 			}
 			
 			//Get initial base location of subject
-			if(current.contains("Sbjct") && getSubject == false){
+			if(current.contains("Sbjct ") && getSubject == false){
 				matches.add(current);				
 				//Set boolean to true, only want first reading
 				getSubject = true;
 							
 			}
+			
+			if(current.contains("Query ") && current.contains("-")){
+				
+				for(int i=0; i<current.length(); i++){
+					
+					//System.out.println(current.charAt(i));
+					
+					if(current.charAt(i) == '-'){
+						System.out.println("GAP!");						
+						qgaps++;
+						matchQGaps.set(newmatch, qgaps);
+					}				
+					
+				}				
+			}
+			
+			
+			if(current.contains("Sbjct") && current.contains("-")){
+				
+				for(int i=0; i<current.length(); i++){
+					
+					//System.out.println(current.charAt(i));
+					
+					if(current.charAt(i) == '-'){
+						System.out.println("GAP!");
+						sgaps++;
+						System.out.println("ADDING GAP: " + sgaps);
+						matchSGaps.set(newmatch, sgaps);
+					}				
+					
+				}				
+			}
+			
+
+			
+			
 			
 		}
 			
@@ -105,12 +155,14 @@ public class BlastReader {
 		
 		//Subject & Query end
 		int qend = 0;
-		int subend = 0;		
-		
-		
+		int subend = 0;				
 		
 		//Used to count out the three strings from the list
 		int count = 1;
+		
+		//Used to count no. matches created
+		int matchno = 0;
+		
 		
 		//List to store match objects
 		ArrayList<Match> newmatches = new ArrayList<Match>();		
@@ -176,7 +228,17 @@ public class BlastReader {
 			if(count == 4){
 				
 				qstart = Integer.parseInt(n.substring(7, n.indexOf(" ", 7) ));
-				qend = Integer.parseInt(n.substring(n.lastIndexOf(" ")+1, n.length()));
+			
+				if(qstrand == true){
+					qend = ((qstart - 1) + matchnum) - matchQGaps.get(matchno);
+					System.out.println("Calc qstart " + qstart);
+					System.out.println("Calc matchnum " + matchnum);
+					System.out.println("Calc matchqgaps " + matchQGaps.get(matchno));
+					System.out.println(qend);
+				}
+				else{
+					qend = ((qstart+1) - matchnum) + matchQGaps.get(matchno);
+				}
 				
 
 				
@@ -188,7 +250,19 @@ public class BlastReader {
 				
 				
 				substart = Integer.parseInt(n.substring(7, n.indexOf(" ", 7) ));
-				subend = Integer.parseInt(n.substring(n.lastIndexOf(" ")+1, n.length()));
+				
+				if(substrand == true){
+					
+					subend = ((substart-1) + matchnum) - matchSGaps.get(matchno);
+				}
+				else{
+					subend = ((substart+1) - matchnum) + matchSGaps.get(matchno);
+				}
+				
+				System.out.println("SUB GAPS!: " + matchSGaps.get(matchno));
+				
+				
+				
 				System.out.println("Subject Start: " + substart);				
 				
 								
@@ -207,8 +281,10 @@ public class BlastReader {
 			//Reset/Increment Count
 			if(count!=5)
 				count++;						
-			else
-				count = 1;					
+			else{
+				count = 1;			
+				matchno++;
+			}
 		}		
 		
 		//Return the finished objects

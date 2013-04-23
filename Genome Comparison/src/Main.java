@@ -14,6 +14,7 @@ public class Main {
 
 	private static int limit = 1;
 
+	private static Display display;
 	//private static Classifier bnet;
 	
 	//private static Classifier bnet2;
@@ -24,12 +25,12 @@ public class Main {
 		//Read in saved Bayesnets
 		
 		//Set up GUI
-		Display window = new Display();
+		display = new Display();
 		
 		//Pass networks
-		window.setNetworks(BayesianNet.DeserialiseNet("MatchNet"),BayesianNet.DeserialiseNet("IDNet") );
+		display.setNetworks(BayesianNet.DeserialiseNet("MatchNet"),BayesianNet.DeserialiseNet("IDNet") );
 		
-		window.drawWindow();
+		display.drawWindow();
 	
 	}
 	
@@ -85,17 +86,25 @@ public class Main {
 			
 			dist = net1.distributionForInstance(dataSet.instance(i));
 						
+			String results;
 			//Display results
-			System.out.println("\nMatching Bases: " + dataSet.instance(i).value(0) + "/" + dataSet.instance(i).value(1));
-			System.out.println("Match Percentage: " + dataSet.instance(i).value(2) + "%");
-			System.out.println("Base Difference: " + dataSet.instance(i).value(3));
-			System.out.println("\nResults:");
-			System.out.println("Total Match: " + dist[0]);
-			System.out.println("Partial Match: " + dist[1]);
-			System.out.println("SNP: " + dist[2]);
-			System.out.println("SB-IN: " + dist[3]);
-			System.out.println("SB-DEL: " + dist[4]);
-			System.out.println("___________________________");
+			results = "";
+			results = "\nMatching Bases: " + dataSet.instance(i).value(0) + "/" + dataSet.instance(i).value(1);
+			results = results + ("\nMatch Percentage: " + dataSet.instance(i).value(2) + "%");
+			results = results + ("\nBase Difference: " + dataSet.instance(i).value(3));
+			results = results + ("\nMatch Query Start: " + matches.get(i).getQstart());
+			results = results + ("\nMatch Query End: " + matches.get(i).getQend());
+			results = results + ("\nMatch Subject Start: " + matches.get(i).getSstart());
+			results = results + ("\nMatch Subject End: " + matches.get(i).getSend());
+			results = results + ("\n\nResults:");
+			results = results + ("\nTotal Match: " + dist[0]);
+			results = results + ("\nPartial Match: " + dist[1]);
+			results = results + ("\nSNP: " + dist[2]);
+			results = results + ("\nSB-IN: " + dist[3]);
+			results = results + ("\nSB-DEL: " + dist[4]);
+			results = results + ("\n___________________________");
+			
+			display.setText(results);
 			
 		}
 		
@@ -106,6 +115,7 @@ public class Main {
 		//For each match
 		for(int i=0; i <dataSet.numInstances(); i++){
 				
+			String results;
 			
 			//Values for this match (i)
 			int qstart = matches.get(i).getQstart();
@@ -243,12 +253,14 @@ public class Main {
 					
 					dist2 = net2.distributionForInstance(dataSet2.instance(i));
 					
-					System.out.println("Insertion: " + dist2[0]);
-					System.out.println("Deletion: " + dist2[1]);
-					System.out.println("Query Duplication: " + dist2[2]);
-					System.out.println("Subject Duplication: " + dist2[3]);
-					System.out.println("N/A: " + dist2[4]);
 					
+					results = "";
+					results = results + ("Insertion: " + dist2[0]);
+					results = results +("Deletion: " + dist2[1]);
+					results = results +("Query Duplication: " + dist2[2]);
+					results = results +("Subject Duplication: " + dist2[3]);
+					results = results +("N/A: " + dist2[4]);
+					display.setText(results);
 					
 				}				
 			}			

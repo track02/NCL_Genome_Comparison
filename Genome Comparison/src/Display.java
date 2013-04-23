@@ -194,7 +194,6 @@ public class Display {
 		frame.getContentPane().add(radioPanel, BorderLayout.EAST); 
 		
 		
-		
 	}
 	
 	
@@ -213,6 +212,17 @@ public class Display {
 	}
 	
 	
+	//Set text in JTextArea
+	public void setText(String str){
+		
+		console.append(str);
+		
+	}
+	
+	//Clear JTextArea
+	public void clearText(){
+		console.setText("");
+	}
 	
 	
 	
