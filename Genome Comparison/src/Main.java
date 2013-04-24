@@ -258,11 +258,24 @@ public class Main {
 					
 					
 					results = "";
+					results = results + ("\nComparing Two Matches\n");
+					results = results + ("\nFirst Match: Query Start: " + matches.get(i).getQstart());
+					results = results + ("\nFirst Match: Query End: " + matches.get(i).getQend());
+					results = results + ("\nFirst Match: Subject Start: " + matches.get(i).getSstart());
+					results = results + ("\nFirst Match: Subject End: " + matches.get(i).getSend());
+					results = results + ("\n\n");
+					results = results + ("\nSecond Match: Query Start: " + matches.get(j).getQstart());
+					results = results + ("\nSecond Match: Query End: " + matches.get(j).getQend());
+					results = results + ("\nSecond Match: Subject Start: " + matches.get(j).getSstart());
+					results = results + ("\nSecond Match: Subject End: " + matches.get(j).getSend());
+					
+					results = results + ("\n\nResults");
 					results = results + ("\n\nInsertion: " + dist2[0]);
 					results = results +("\nDeletion: " + dist2[1]);
 					results = results +("\nQuery Duplication: " + dist2[2]);
 					results = results +("\nSubject Duplication: " + dist2[3]);
 					results = results +("\nN/A: " + dist2[4]);
+					results = results + ("\n___________________________");
 					display.setResultText(results);
 					
 				}				
