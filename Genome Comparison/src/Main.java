@@ -104,7 +104,7 @@ public class Main {
 			results = results + ("\nSB-DEL: " + dist[4]);
 			results = results + ("\n___________________________");
 			
-			display.setText(results);
+			display.setResultText(results);
 			
 		}
 		
@@ -255,12 +255,12 @@ public class Main {
 					
 					
 					results = "";
-					results = results + ("Insertion: " + dist2[0]);
-					results = results +("Deletion: " + dist2[1]);
-					results = results +("Query Duplication: " + dist2[2]);
-					results = results +("Subject Duplication: " + dist2[3]);
-					results = results +("N/A: " + dist2[4]);
-					display.setText(results);
+					results = results + ("\n\nInsertion: " + dist2[0]);
+					results = results +("\nDeletion: " + dist2[1]);
+					results = results +("\nQuery Duplication: " + dist2[2]);
+					results = results +("\nSubject Duplication: " + dist2[3]);
+					results = results +("\nN/A: " + dist2[4]);
+					display.setResultText(results);
 					
 				}				
 			}			

@@ -1,7 +1,8 @@
 import javax.swing.*;
-import javax.swing.event.*;
+
 
 import weka.classifiers.Classifier;
+
 
 import java.awt.*;
 import java.awt.event.*;
@@ -18,6 +19,11 @@ public class Display {
 	//Frame and panels
 	private JFrame frame = new JFrame("Genome Comparison");
 	private JPanel leftpanel = new JPanel();
+	private JPanel compbuttons = new JPanel();
+	private JPanel trainbuttons = new JPanel();
+
+	private JPanel tolbuttons = new JPanel();
+	
 	private JPanel rightpanel = new JPanel();
 	
 	//Buttons
@@ -28,9 +34,16 @@ public class Display {
 	private JButton btnTrainFile = new JButton("Select Training Data");
 	private JButton btnTrain = new JButton("Train Network");
 	
+	//Button for submitting Tol value
+	private JButton tolsub = new JButton("Submit");
+	
+	private JLabel results = new JLabel("Results Display");
+	
 	//Radio Buttons for choosing which network to train
 	private JRadioButton network1 = new JRadioButton("Network 1 - Single Match Features");
 	private JRadioButton network2 = new JRadioButton("Network 2 - Two Match Features");
+	
+	
 	
 	private ButtonGroup netselect = new ButtonGroup();
 	JPanel radioPanel = new JPanel(new GridLayout(0,1));
@@ -39,8 +52,18 @@ public class Display {
 	private int nettoggle = 0;
 	
 	//Text panel for console output
-	private JTextArea console = new JTextArea(20,50);	
-	JScrollPane scroll = new JScrollPane(console);	
+	private JTextArea console = new JTextArea(25,30);	
+	private JScrollPane scroll = new JScrollPane(console);	
+	
+	//Text panel to display file names
+	private JTextArea compfile = new JTextArea(1, 20);
+	private JScrollPane cfile = new JScrollPane(compfile);
+	private JTextArea testfile = new JTextArea(1, 20);
+	private JScrollPane tfile = new JScrollPane(testfile);
+	
+	//Text panel for user to input tol value
+	private JTextArea tolv = new JTextArea(1,6);
+	private JScrollPane tolscroll = new JScrollPane(tolv);
 		
 	//Menu Bar
 	private JMenuBar menu = new JMenuBar();
@@ -61,8 +84,7 @@ public class Display {
 	
 	//Current Comparison / Training files
 	private File compf;
-	private File trainf;
-	
+	private File trainf;	
 		
 	//Action Listener for Buttons
 	private ActionListener al = new ActionListener() {
@@ -94,7 +116,8 @@ public class Display {
 					
 						compf = filec.getSelectedFile();		
 						try {
-							BlastReader.setComp(compf);
+							setCFileText(compf.getName());
+							BlastReader.setComp(compf);							
 						} catch (FileNotFoundException e1) {
 							e1.printStackTrace();
 						}			
@@ -102,6 +125,7 @@ public class Display {
 					else{
 						
 						trainf = filec.getSelectedFile();
+						setTFileText(trainf.getName());
 						TrainNet.setFile(trainf);						
 					}
 						
@@ -138,6 +162,11 @@ public class Display {
 				nettoggle = 1;
 				System.out.println(nettoggle);
 			}
+			
+			if(e.getSource().equals(tolsub)){	
+				Main.setlimit(Integer.parseInt(tolv.getText()));		
+				setResultText("Tolerance Value Set: " + Integer.parseInt(tolv.getText()));
+			}
 		}
 	};
 	
@@ -145,9 +174,18 @@ public class Display {
 	//Constructor
 	public Display(){
 		
-				
+		//System.out.println(btnCompFile.getSize().height + "," + btnCompFile.getSize())
+		
+		results.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		rightpanel.setLayout(new BorderLayout());
+		leftpanel.setLayout(new GridLayout(9, 8));
+
+		
 		//Set up	
 		console.setEditable(false);
+		compfile.setEditable(false);
+		testfile.setEditable(false);
 		
 		btnCompFile.addActionListener(al);					
 		btnRun.addActionListener(al);
@@ -159,6 +197,8 @@ public class Display {
 		network1.setSelected(true);
 		network2.addActionListener(al);	
 		
+		tolsub.addActionListener(al);
+	
 		
 		//Add menu bar to frame
 		frame.setJMenuBar(menu);
@@ -172,14 +212,37 @@ public class Display {
 		menu.add(mfile);
 		menu.add(mhelp);
 		
-		//Add buttons to left panel
-		leftpanel.add(btnCompFile);
-		leftpanel.add(btnRun);
-		leftpanel.add(btnTrainFile);
-		leftpanel.add(btnTrain);
+		//Add buttons to panels
+		compbuttons.add(btnCompFile);
+		compbuttons.add(cfile);
+		trainbuttons.add(btnTrainFile);
+		trainbuttons.add(tfile);
+		compbuttons.add(btnRun);		
+		trainbuttons.add(btnTrain);
+		//trainbuttons.add(radioPanel);
+		tolbuttons.add(tolscroll);
+		tolbuttons.add(tolsub);
+		//runbuttons.add(tolbuttons, BorderLayout.NORTH);
+		//runbuttons.add(radioPanel, BorderLayout.SOUTH);
 		
+		
+		network1.setHorizontalAlignment(SwingConstants.CENTER);
+		network2.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		leftpanel.add(new JLabel("Select Comparison File & Run", SwingConstants.CENTER));
+		leftpanel.add(compbuttons);
+		leftpanel.add(new JLabel("Set Data & Train Network", SwingConstants.CENTER));
+		leftpanel.add(trainbuttons);
+		leftpanel.add(new JLabel("Select Network for Training", SwingConstants.CENTER));
+		leftpanel.add(radioPanel);
+		leftpanel.add(new JLabel(""));
+		leftpanel.add(new JLabel("Set Tolerance Value", SwingConstants.CENTER));
+		leftpanel.add(tolbuttons);
+
+				
 		//Add text pane to right
-		rightpanel.add(scroll);
+		rightpanel.add(results, BorderLayout.NORTH);
+		rightpanel.add(scroll, BorderLayout.CENTER);
 		
 		//Add radio buttons to group
 		netselect.add(network1);
@@ -190,8 +253,8 @@ public class Display {
 		//Add panels to frame
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.getContentPane().add(leftpanel, BorderLayout.WEST);
-		frame.getContentPane().add(rightpanel, BorderLayout.SOUTH);
-		frame.getContentPane().add(radioPanel, BorderLayout.EAST); 
+		frame.getContentPane().add(rightpanel, BorderLayout.EAST);
+		//frame.getContentPane().add(radioPanel, BorderLayout.NORTH); 
 		
 		
 	}
@@ -213,11 +276,26 @@ public class Display {
 	
 	
 	//Set text in JTextArea
-	public void setText(String str){
+	public void setResultText(String str){
 		
 		console.append(str);
 		
 	}
+	
+	public void setCFileText(String str){
+		
+		compfile.setText("");
+		compfile.setText(str);		
+	}
+	
+	public void setTFileText(String str){
+		
+		testfile.setText("");
+		testfile.setText(str);
+		
+	}
+	
+	
 	
 	//Clear JTextArea
 	public void clearText(){
