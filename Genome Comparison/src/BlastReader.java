@@ -24,7 +24,16 @@ public class BlastReader {
 	//Sets the currentComp to passed file path
 	//TODO - File Chooser + GUI
 	public static void setComp(File f) throws FileNotFoundException{
-				
+			
+		//Reset values
+		matchSGaps.clear();
+		matchQGaps.clear();
+		qgaps = 0;
+		sgaps = 0;
+		newmatch = -1;
+		getQuery = false;
+		getSubject = false;
+		
 		currentComp = f;		
 		scan = new Scanner(currentComp);		
 	}

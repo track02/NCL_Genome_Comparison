@@ -117,7 +117,8 @@ public class Display {
 						compf = filec.getSelectedFile();		
 						try {
 							setCFileText(compf.getName());
-							BlastReader.setComp(compf);							
+							BlastReader.setComp(compf);		
+							System.out.println(compf.getName());
 						} catch (FileNotFoundException e1) {
 							e1.printStackTrace();
 						}			

@@ -39,6 +39,9 @@ public class Main {
 	public static void run(Classifier net1, Classifier net2) throws Exception {
 		//Sets the comparison file to read from
 		//BlastReader.setComp("Test_Comparison_Files/Test Data - Duplication");
+		//net1 = BayesianNet.DeserialiseNet("MatchNet");
+		//net2 = BayesianNet.DeserialiseNet("IDNet");
+		
 		
 		//Reads from the comparison file and returns a number of matches
 		ArrayList<Match> matches = BlastReader.parseComp();
