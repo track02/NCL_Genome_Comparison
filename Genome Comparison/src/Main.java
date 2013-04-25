@@ -125,6 +125,7 @@ public class Main {
 			int qend = matches.get(i).getQend();
 			int substart = matches.get(i).getSstart();
 			int subend = matches.get(i).getSend();
+			System.out.println(qstart + "," + qend + "," + substart + "," + subend);
 			
 			//Distance from qend to nextqstart
 			int qdistance;

@@ -239,7 +239,8 @@ public class BlastReader {
 				qstart = Integer.parseInt(n.substring(7, n.indexOf(" ", 7) ));
 			
 				if(qstrand == true){
-					qend = ((qstart - 1) + matchnum) - matchQGaps.get(matchno);
+					qend = ((qstart) + matchnum) - matchQGaps.get(matchno);
+					if(qstart == 1) qend--;
 					System.out.println("Calc qstart " + qstart);
 					System.out.println("Calc matchnum " + matchnum);
 					System.out.println("Calc matchqgaps " + matchQGaps.get(matchno));
@@ -262,7 +263,8 @@ public class BlastReader {
 				
 				if(substrand == true){
 					
-					subend = ((substart-1) + matchnum) - matchSGaps.get(matchno);
+					subend = ((substart) + matchnum) - matchSGaps.get(matchno);
+					if(substart == 1)subend--;
 				}
 				else{
 					subend = ((substart+1) - matchnum) + matchSGaps.get(matchno);
