@@ -6,13 +6,6 @@ Stage 3 - Project
 Classifying genome comparison features through the use of Bayesian Networks
 
 
-Current To Do List
-=================
-- Build GUI
-- Testing of SB-DEL / SB-In & Insertion / Deletion
-- Output Results to text file or list / Database setup
-- FileChooser - allow user to select comparison file
-
 Done
 =================
 - Parse basic match information from BLAST file
@@ -27,6 +20,7 @@ Done
 - Detection of SNP 
 - Detection of SB-IN / SB-DEL
 - Detection of Insertion / Deletion
+- GUI / File Chooser
 
 
 Instructions - running via eclipse/IDE
